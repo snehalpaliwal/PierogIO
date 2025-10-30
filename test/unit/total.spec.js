@@ -3,6 +3,7 @@ const { subtotal } = require('../../src/subtotal');
 const { discounts } = require('../../src/discounts');
 const { deliveryFee } = require('../../src/delivery');
 const { tax } = require('../../src/tax');
+//const { expect } = require('vitest');
 
 describe('Order Calculations', () => {
   
@@ -32,6 +33,8 @@ describe('Order Calculations', () => {
       };
       
       const orderTotal = total(order, context);
+      const orderTax = tax(order, context.delivery);
+      expect(orderTax).toBeGreaterThanOrEqual(0);
       expect(orderTotal).toBeGreaterThan(0);
       expect(Number.isInteger(orderTotal)).toBe(true);
     });
